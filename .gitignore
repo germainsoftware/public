@@ -1,0 +1,14 @@
+*/.apt_generated/
+*/.settings/
+*/bin/
+*/target/
+*/.classpath
+*/.project
+/logs/
+nb*.xml
+.settings/
+*~
+*.iml
+.idea
+.DS_Store
+/tmp/
