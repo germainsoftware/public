@@ -1,3 +1,6 @@
+/* global GermainAPMSiebelHIIE5Utils */
+
+// GermainAPM init
 GermainAPM.init({
     beacon_url: 'http://${domain}/apm-data-services/beacon',
     RT: {enabled: true},

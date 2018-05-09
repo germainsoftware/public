@@ -1,23 +1,22 @@
 GermainAPM.init({
     beacon_url: 'http://${domain}/apm-data-services/beacon',
-    AsyncMonitoring : { enabled: true},
-    RT: {enabled: true}, 
-    IframeMonitoring: {enabled: true},
-    WebSocketMonitoring: {enabled: true},
+    AsyncMonitoring: { enabled : true},
+    RT: {enabled : true}, 
+    IframeMonitoring: {enabled : true},
+    WebSocketMonitoring: {enabled : false},
     ClickMonitoring: {enabled: true, frameMonitoringEnabled: true, fullMonitoringEnabled: true, eventInit: "page_ready"},
     MouseMonitoring: {enabled: true, frameMonitoringEnabled: true, snapshotInterval: 100, 
-        pushInterval: 5, eventInit: "page_ready"},
-    ChangeMonitoring: {enabled: true, eventInit: "page_ready"},
-    KeyboardMonitoring: {enabled: true, eventInit: "page_ready"},
-    MemoryMonitoring: {enabled: true, repeatSeconds: 120, eventInit: "page_ready"},
+        pushInterval: 15, eventInit: "page_ready"},
+    ChangeMonitoring: {enabled : true, eventInit: "page_ready"},
+    KeyboardMonitoring: {enabled : true, eventInit: "page_ready"},
+    MemoryMonitoring: {enabled: true, repeatSeconds: 120},
     InactivityMonitoring: {enabled: true, eventInit: "page_ready", threshold: 30},
     VisibilityMonitoring: {enabled: true},
     StaticResourcesMonitoring: {enabled: true, eventInit: "page_ready", cssMonitoringEnabled: true, 
          cssParsingEnabled: true, imagesMonitoringEnabled: true, cacheEnabled: true},
     ScrollMonitoring: {enabled: true, snapshotInterval: 1000, pushInterval: 15, eventInit: "page_ready"},
     ResizeMonitoring: {enabled: true, eventInit: "dom_loaded"},
-    DomMonitoring: {enabled: true, eventInit: "page_ready", pushInterval: 5, 
-        changesCountToSendFullBody: 750, dataTimeout: 30000}
+    DomMonitoring: {enabled: true, eventInit: "page_ready", pushInterval: 5, pushFullInterval: 30, changesCountToSendFullBody: 250, dataTimeout: 30000}
 },{
     USE_AJAX: true, // if true then send all data using Ajax requests
     DATA_QUEUE: {
@@ -29,18 +28,18 @@ GermainAPM.init({
     ALERT_MONITORING: true, // enable window.alert warning and error messages
     REQUEST_BODY_MONITORING : true, // catch request body 
     REQUEST_BODY_MONITORING_SIZE_LIMIT: 7000, // limit body size (in chars length)
-    URL_TITLE: function(_document){ return _document['title']; } ,
-    DATA_TIMEOUT: 10000, // how long we can try to send collect data back (in ms)
+    URL_TITLE : function(_document){ return _document['title']; } ,
+    DATA_TIMEOUT : 5000, // how long we can try to send collect data back (in ms)
     CUMULATIVE_TXN_MONITORING: {
         count: 1,
         refreshInterval: 15, // (in seconds) we check periodically if we can close current cumulative txn and send current cum. txn
         hierarchyId: new Date().getTime() + Math.random().toString(36).substring(6),
-        category: 'HTTP:AngularJS Page View', // cumulative txn name
         excludeUrls: []
     },
     EXCLUDE_URLS: []
 },{
-    appName: 'AngularJS',
-    username: '<default>',
-    session: BOOMR.utils.session.getSessionId
+    appName : 'Wordpress',
+    username : '<default>',
+    session: BOOMR.utils.session.getSessionId,
+    cid: BOOMR.utils.session.getSessionId
 });

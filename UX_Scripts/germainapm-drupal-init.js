@@ -41,5 +41,6 @@ GermainAPM.init({
 },{
     appName : 'Drupal',
     username : '<default>',
-    session: BOOMR.utils.session.getSessionId
+    session: BOOMR.utils.session.getSessionId,
+    cid: BOOMR.utils.session.getSessionId
 });

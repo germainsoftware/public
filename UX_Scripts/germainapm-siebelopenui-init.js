@@ -1,3 +1,4 @@
+// GermainAPM UX configuration file
 GermainAPM.init({
     beacon_url: 'http://${domain}/apm-data-services/beacon',
     RT: {enabled: true},
@@ -21,7 +22,7 @@ GermainAPM.init({
     VisibilityMonitoring: {enabled: true, eventInit: "page_ready"},
     InactivityMonitoring: {enabled: true, eventInit: "page_ready", threshold: 30},
     StaticResourcesMonitoring: {enabled: true, eventInit: "page_ready", cssMonitoringEnabled: true, 
-        cssParsingEnabled: true, imagesMonitoringEnabled: true, cacheEnabled: true},
+         cssParsingEnabled: true, imagesMonitoringEnabled: true, cacheEnabled: true},
     ScrollMonitoring: {enabled: true, snapshotInterval: 1000, pushInterval: 15, eventInit: "page_ready"},
     ResizeMonitoring: {enabled: true, eventInit: "dom_loaded"},
     DomMonitoring: {enabled: true, eventInit: "page_ready", pushInterval: 5, 
@@ -39,6 +40,8 @@ GermainAPM.init({
     ALERT_NAME_PARSER: GermainAPMSiebelOpenUIUtils.alertNameParser, // popup alert message extractor
     REQUEST_BODY_MONITORING: true, // catch POST request body
     REQUEST_BODY_MONITORING_SIZE_LIMIT: 7000, // limit body size (in chars length)
+    RESPONSE_BODY_MONITORING: false, // catch response body 
+    RESPONSE_BODY_PARSER: GermainAPMSiebelOpenUIUtils.responseBodyParser,  
     URL_TITLE: GermainAPMSiebelOpenUIUtils.titleLookup, // extract request title
     DATA_TIMEOUT: 10000, // how long we can try to send collect data back (in ms)
     CUMULATIVE_TXN_MONITORING: {
@@ -57,7 +60,8 @@ GermainAPM.init({
             /ie-preamble/, 
             /Ping/,
             /SWECmd=InvokeMethod.*GetWebSessionInfo/,
-            /SWECmd=InvokeMethod.*&SWEMethod=GetProfileAttr.*&SWEIPS=/
+            /SWECmd=InvokeMethod.*&SWEMethod=GetProfileAttr.*&SWEIPS=/,
+            /GetAlarmInstances/
         ]
     },
     EXCLUDE_URLS: [ // exclude data points from monitoring by full URL (including query string)
@@ -71,5 +75,6 @@ GermainAPM.init({
     appName: 'Siebel',
     // serverHost: null, // provide if you want to hardcode serverHost value
     username: GermainAPMSiebelOpenUIUtils.usernameLookup,
-    session: GermainAPMSiebelOpenUIUtils.sessionLookup
+    session: GermainAPMSiebelOpenUIUtils.sessionLookup,
+    cid: GermainAPMSiebelOpenUIUtils.correlationIdLookup
 });
