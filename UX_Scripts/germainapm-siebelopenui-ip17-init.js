@@ -21,7 +21,7 @@ GermainAPM.init({
         /*additionalInfoLookup: GermainAPMSiebelOpenUIUtils.additionalInfoLookup,*/
         changeLabelLookup: GermainAPMSiebelOpenUIUtils.fieldLabelLookup},
     KeyboardMonitoring: {enabled : true, eventInit: "page_ready"},
-    AsyncMonitoring: {enabled : true, requestIndexFilter: GermainAPMSiebelOpenUIUtils.requestIndexFilter },
+    AsyncMonitoring: {enabled : true, requestIndexFilter: GermainAPMSiebelOpenUIUtils.requestIndexFilter},
     MemoryMonitoring: {enabled: true, repeatSeconds: 120, eventInit: "page_ready"},
     CpuMonitoring: {enabled: false, repeatSeconds: 60, samplesAveragedPerRound: 12, sampleTimeMillis: 2000, eventInit: "page_ready"},
     VisibilityMonitoring: {enabled: true, eventInit: "page_ready"},
@@ -56,7 +56,6 @@ GermainAPM.init({
         hierarchyId: new Date().getTime() + Math.random().toString(36).substring(6),
         queryStringGenerator: GermainAPMSiebelOpenUIUtils.queryStringGenerator, // cumulative txn query string extractor
         excludeUrls: [ // exclude http request from cumulative txn
-            /^(?!.*start\.swe.*|.*\/marker.*)/,
             /SWECmd=InvokeMethod&SWEService=Message\+Bar&SWEMethod=UpdatePrefMsg/,
             /SWECmd=InvokeMethod&SWEService=SWE\+Command\+Manager&SWEMethod=BatchCanInvoke/,
             /SWEService=Communications/,
@@ -66,7 +65,9 @@ GermainAPM.init({
             /Ping/,
             /SWECmd=InvokeMethod.*GetWebSessionInfo/,
             /SWECmd=InvokeMethod.*&SWEMethod=GetProfileAttr.*&SWEIPS=/,
-            /GetAlarmInstances/
+            /GetAlarmInstances/,
+            /getQueue/,
+            /RefreshBusComp/
         ]
     },
     EXCLUDE_URLS: [ // exclude data points from monitoring by full URL (including query string)

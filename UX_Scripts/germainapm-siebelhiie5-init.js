@@ -2,7 +2,7 @@
 
 // GermainAPM init
 GermainAPM.init({
-    beacon_url: 'http://${domain}/apm-data-services/beacon',
+    beacon_url: 'http://${domain}/ingestion/beacon',
     RT: {enabled: true},
     IframeMonitoring: {enabled: false, eventInit: "page_ready"},
     ClickMonitoring: {enabled: false, frameMonitoringEnabled: false, fullMonitoringEnabled: false},

@@ -1,10 +1,12 @@
 GermainAPM.init({
-    beacon_url: 'http://${domain}/apm-data-services/beacon',
+    beacon_url: 'http://${domain}/ingestion/beacon',
     AsyncMonitoring: {enabled : true, queryStringGenerator: GermainAPMSalesforceUtils.xhrQueryStringGenerator},
     RT: {enabled : true}, 
     IframeMonitoring: {enabled : false},
     ClickMonitoring: {enabled: true, fullMonitoringEnabled: true, frameMonitoringEnabled: false, 
         clickContainerLookup: GermainAPMSalesforceUtils.clickContainerLookup, eventInit: "page_ready"},
+    FocusMonitoring: {enabled: true, pushInterval: 15, eventInit: "page_ready"},
+    InputMonitoring: {enabled: true},
     MouseMonitoring: {enabled: true, frameMonitoringEnabled: true, snapshotInterval: 100, 
         pushInterval: 15, eventInit: "page_ready"},
     ChangeMonitoring: {enabled : true, eventInit: "page_ready"},
