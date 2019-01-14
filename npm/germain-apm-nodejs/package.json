@@ -1,0 +1,42 @@
+{
+  "name": "germainapm-nodejs",
+  "description": "germain APM Node.js Monitoring",
+  "version": "8.5.0",
+  "dependencies": {
+    "dateformat": "^3.0.3",
+    "pidusage": "2.0.17",
+    "ua-parser-js": "^0.7.19",
+    "uniqid": "^5.0.3",
+    "winston": "^3.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/register": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "clean-webpack-plugin": "^1.0.0",
+    "eslint": "^5.11.1",
+    "express": "^4.16.4",
+    "mocha": "^5.2.0",
+    "rollup": "^1.1.0",
+    "rollup-plugin-babel": "^4.3.0",
+    "sinon": "^7.2.2",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.1.2",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "build-dev": "webpack --config ./webpack.config.js --mode=development",
+    "test": "mocha --require @babel/register \"test/**/**.test.js\"",
+    "lint": "eslint src",
+    "mock": "node mock.server"
+  },
+  "private": true,
+  "main": "lib/germainAPM.cjs.js",
+  "module": "lib/germainAPM.es.js"
+}
