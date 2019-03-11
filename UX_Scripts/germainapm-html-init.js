@@ -11,7 +11,7 @@ GermainAPM.init({
         pushInterval: 15, eventInit: "page_ready"},
     ChangeMonitoring: {enabled : true, eventInit: "page_ready"},
     KeyboardMonitoring: {enabled : true, eventInit: "page_ready"},
-    MemoryMonitoring: {enabled: true, repeatSeconds: 120},
+    MemoryMonitoring: {enabled: true},
     InactivityMonitoring: {enabled: true, eventInit: "page_ready", threshold: 30},
     VisibilityMonitoring: {enabled: true},
     StaticResourcesMonitoring: {enabled: true, eventInit: "page_ready", cssMonitoringEnabled: true, 

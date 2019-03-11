@@ -22,7 +22,7 @@ GermainAPM.init({
         changeLabelLookup: GermainAPMSiebelOpenUIUtils.fieldLabelLookup},
     KeyboardMonitoring: {enabled : true, eventInit: "page_ready"},
     AsyncMonitoring: {enabled : true, requestIndexFilter: GermainAPMSiebelOpenUIUtils.requestIndexFilter },
-    MemoryMonitoring: {enabled: true, repeatSeconds: 120, eventInit: "page_ready"},
+    MemoryMonitoring: {enabled: true, eventInit: "page_ready"},
     CpuMonitoring: {enabled: false, repeatSeconds: 60, samplesAveragedPerRound: 12, sampleTimeMillis: 2000, eventInit: "page_ready"},
     VisibilityMonitoring: {enabled: true, eventInit: "page_ready"},
     InactivityMonitoring: {enabled: true, eventInit: "page_ready", threshold: 30},
