@@ -1,17 +1,18 @@
+/* global GermainAPM, GermainAPMSiebelHIUtils */
 GermainAPM.init({
     beacon_url: 'https://${domain}/ingestion/beacon',
-    RT: {enabled: true},
-    IframeMonitoring: {enabled: false, eventInit: "page_ready"},
-    ClickMonitoring: {enabled: false, frameMonitoringEnabled: false, fullMonitoringEnabled: false},
-    MouseMonitoring: {enabled: false, frameMonitoringEnabled: true, snapshotInterval: 1000, pushInterval: 15, eventInit: "page_ready"},
     ChangeMonitoring: {enabled: false, eventInit: "page_ready"},
+    ClickMonitoring: {enabled: false, frameMonitoringEnabled: false, fullMonitoringEnabled: false},
+    ConsoleMonitoring: {enabled: false},
+    IframeMonitoring: {enabled: false, eventInit: "page_ready"},
     KeyboardMonitoring: {enabled: true, eventInit: "page_ready"},
+    MouseMonitoring: {enabled: false, frameMonitoringEnabled: true, snapshotInterval: 1000, pushInterval: 15, eventInit: "page_ready"},
     PopupDialogMonitoring: {enabled: false},
-    ConsoleMonitoring: {enabled: false}
+    RT: {enabled: true}
 }, {
+    PAGE_TITLE: GermainAPMSiebelHIUtils.titleLookup,
     REQUEST_BODY_MONITORING: false, // catch request body
     SEND_SYNC_ON_UNLOAD: true, // this only applies when the navigator.sendBeacon is unavailable (IE)
-    PAGE_TITLE: GermainAPMSiebelHIUtils.titleLookup,
     USER_CLICK: {
         count: 0,
         refreshInterval: 15, // (in seconds) we check periodically if we can close current user click txn and send current cum. txn

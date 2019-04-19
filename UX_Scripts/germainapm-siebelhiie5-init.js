@@ -1,16 +1,17 @@
+/* global GermainAPM, GermainAPMSiebelHIIE5Utils */
 GermainAPM.init({
     beacon_url: 'https://${domain}/ingestion/beacon',
-    RT: {enabled: true},
-    IframeMonitoring: {enabled: false, eventInit: "page_ready"},
-    ClickMonitoring: {enabled: false, frameMonitoringEnabled: false, fullMonitoringEnabled: false},
-    MouseMonitoring: {enabled: false, frameMonitoringEnabled: true, snapshotInterval: 1000, pushInterval: 15, eventInit: "page_ready"},
     ChangeMonitoring: {enabled: false, eventInit: "page_ready"},
+    ClickMonitoring: {enabled: false, frameMonitoringEnabled: false, fullMonitoringEnabled: false},
+    ConsoleMonitoring: {enabled: false},
     KeyboardMonitoring: {enabled: false, eventInit: "page_ready"},
+    IframeMonitoring: {enabled: false, eventInit: "page_ready"},
+    MouseMonitoring: {enabled: false, frameMonitoringEnabled: true, snapshotInterval: 1000, pushInterval: 15, eventInit: "page_ready"},
     PopupDialogMonitoring: {enabled: false},
-    ConsoleMonitoring: {enabled: false}
+    RT: {enabled: true}
 }, {
-    REQUEST_BODY_MONITORING: false, // catch request body 
     PAGE_TITLE: GermainAPMSiebelHIIE5Utils.titleLookup,
+    REQUEST_BODY_MONITORING: false, // catch request body 
     SEND_SYNC_ON_UNLOAD: true, // this only applies when the navigator.sendBeacon is unavailable (IE)
     USER_CLICK: {
         count: 0,
