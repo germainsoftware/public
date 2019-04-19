@@ -1,6 +1,7 @@
 GermainAPM.init({
-    beacon_url: 'http://${domain}/ingestion/beacon',
-    AsyncMonitoring : {enabled : true},
+    beacon_url: 'https://${domain}/ingestion/beacon',
+    AsyncMonitoring : {enabled : true, taggingEnabled: false},
+    FetchMonitoring: {enabled: true},
     RT: {enabled : true}, 
     IframeMonitoring: {enabled : true},
     WebSocketMonitoring: {enabled : false},
@@ -19,24 +20,21 @@ GermainAPM.init({
     ScrollMonitoring: {enabled: true, snapshotInterval: 1000, pushInterval: 15, eventInit: "page_ready"},
     ResizeMonitoring: {enabled: true, eventInit: "dom_loaded"},
     DomMonitoring: {enabled: true, eventInit: "page_ready", pushInterval: 5, pushFullInterval: 30,
-        changesCountToSendFullBody: 250, dataTimeout: 30000 }
+        changesCountToSendFullBody: 250, dataTimeout: 30000 },
+    PopupDialogMonitoring: {enabled: true},
+    ConsoleMonitoring: {enabled: true}
 },{
-    USE_AJAX: true, // if true then send all data using Ajax requests
-    DATA_QUEUE: {
-        enabled: true, // if true then send all data points to the data queue
-        pushInterval: 5, // if USE_DATA_QUEUE=true then this value says how often should we send data from the queue back to apm (in seconds)
-        queue: [] // storage placeholder
-    },
-    CONSOLE_MONITORING: true, // enable console warning and error monitoring
-    ALERT_MONITORING: true, // enable window.alert warning and error messages
+    DATA_QUEUE_PUSH_INTERVAL: 5,
+    SEND_SYNC_ON_UNLOAD: true, // this only applies when the navigator.sendBeacon is unavailable (IE)
     REQUEST_BODY_MONITORING : true, // catch request body 
-    REQUEST_BODY_MONITORING_SIZE_LIMIT: 7000, // limit body size (in chars length)
-    URL_TITLE : function(_document){ return _document['title']; } ,
+    RESPONSE_BODY_MONITORING: true, // catch response body 
+    RESPONSE_BODY_PARSER: null,
+    PAGE_TITLE : function(_document){ return _document['title']; } ,
     DATA_TIMEOUT : 5000, // how long we can try to send collect data back (in ms)
-    CUMULATIVE_TXN_MONITORING: {
-        count: 1,
-        refreshInterval: 15, // (in seconds) we check periodically if we can close current cumulative txn and send current cum. txn
-        hierarchyId: new Date().getTime() + Math.random().toString(36).substring(6),
+    USER_CLICK: {
+        count: 0,
+        refreshInterval: 15, // (in seconds) we check periodically if we can close current user click txn and send current cum. txn
+        sequence: new Date().getTime() + Math.random().toString(36).substring(6),
         excludeUrls: []
     },
     EXCLUDE_URLS: []
