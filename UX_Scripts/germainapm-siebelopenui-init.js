@@ -33,7 +33,8 @@ GermainAPM.init({
     ScriptingMonitoring: {enabled: true},
     ScrollMonitoring: {enabled: true, snapshotInterval: 1000, pushInterval: 15, eventInit: "page_ready"},
     StaticResourcesMonitoring: {enabled: true, eventInit: "page_ready" },
-    VisibilityMonitoring: {enabled: true, eventInit: "page_ready"}
+    VisibilityMonitoring: {enabled: true, eventInit: "page_ready"},
+    HangMonitoring: { enabled: false, pingInterval: 10, minHangSeconds: 15 }
 }, {
     CORS_PROXY_URL: null,
     DATA_QUEUE_PUSH_INTERVAL: 10,

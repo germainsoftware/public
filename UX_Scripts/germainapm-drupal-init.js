@@ -23,7 +23,8 @@ GermainAPM.init({
     DomMonitoring: {enabled: true, eventInit: "page_ready", pushInterval: 5, pushFullInterval: 30,
         changesCountToSendFullBody: 250, dataTimeout: 30000},
     PopupDialogMonitoring: {enabled: true},
-    ConsoleMonitoring: {enabled: true}
+    ConsoleMonitoring: {enabled: true},
+    HangMonitoring: { enabled: false, pingInterval: 10, minHangSeconds: 15 }
 }, {
     DATA_QUEUE_PUSH_INTERVAL: 5,
     SEND_SYNC_ON_UNLOAD: true, // this only applies when the navigator.sendBeacon is unavailable (IE)
