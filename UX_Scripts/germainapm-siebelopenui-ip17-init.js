@@ -45,9 +45,7 @@ GermainAPM.init({
     REQUEST_BODY_MONITORING: true, // catch POST request body
     SEND_SYNC_ON_UNLOAD: true, // this only applies when the navigator.sendBeacon is unavailable (IE)
     USER_CLICK: {
-        count: 0,
         refreshInterval: 15, // (in seconds) we check periodically if we can close current user click txn and send current cum. txn
-        sequence: new Date().getTime() + Math.random().toString(36).substring(6),
         queryStringGenerator: GermainAPMSiebelOpenUIUtils.queryStringGenerator, // user click txn query string extractor
         excludeUrls: [ // exclude http request from user click txn
             /SWECmd=InvokeMethod&SWEService=Message\+Bar&SWEMethod=UpdatePrefMsg/,
@@ -62,9 +60,12 @@ GermainAPM.init({
             /GetAlarmInstances/,
             /getQueue/,
             /RefreshBusComp/
-        ]
+        ],
+        labelGenerator: GermainAPMSiebelOpenUIUtils.viewLookup
     },
     EXCLUDE_URLS: [ // exclude data points from monitoring by full URL (including query string)
+		/germainapm-.+-component.js/i,
+		/germainapm-.+-init.js/i,
         /SWEService=Communications/,
         /SWECmd=InvokeMethod&SWEService=Message\+Bar&SWEMethod=UpdatePrefMsg/,
         /SWECmd=InvokeMethod&SWEService=SWE\+Command\+Manager&SWEMethod=BatchCanInvoke/,
@@ -76,5 +77,5 @@ GermainAPM.init({
     // serverHost: null, // provide if you want to hardcode serverHost value
     username: GermainAPMSiebelOpenUIUtils.usernameLookup,
     session: GermainAPMSiebelOpenUIUtils.sessionLookup,
-    cid: GermainAPMSiebelOpenUIUtils.correlationIdLookup
+    sequence: BOOMR.utils.session.getSequence //GermainAPMSiebelOpenUIUtils.correlationIdLookup
 });

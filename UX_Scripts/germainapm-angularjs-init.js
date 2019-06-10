@@ -39,12 +39,23 @@ GermainAPM.init({
         count: 0,
         refreshInterval: 15, // (in seconds) we check periodically if we can close current user click txn and send current cum. txn
         sequence: new Date().getTime() + Math.random().toString(36).substring(6),
-        excludeUrls: []
+        excludeUrls: [],
+        labelGenerator: function(){
+            var label = window.location.hash;
+            if(label){
+                return label.slice(1);
+            } else {
+                return window.location.pathname;
+            }
+        }
     },
-    EXCLUDE_URLS: []
+    EXCLUDE_URLS: [
+        /germainapm-.+-component.js/i,
+        /germainapm-.+-init.js/i
+    ]
 }, {
     appName: 'AngularJS',
     username: '<default>',
     session: BOOMR.utils.session.getSessionId,
-    cid: BOOMR.utils.session.getSessionId
+    sequence: BOOMR.utils.session.getSequence
 });

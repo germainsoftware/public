@@ -47,14 +47,17 @@ GermainAPM.init({
         queryStringGenerator: GermainAPMSalesforceUtils.queryStringGenerator, // user click txn query string extractor
         excludeUrls: [// exclude http request from user click txn
             /cometd\/replay/
-        ]
+        ],
+        labelGenerator: GermainAPMSalesforceUtils.viewLookup
     },
     EXCLUDE_URLS: [// exclude data points from monitoring by full URL (including query string)
+        /germainapm-.+-component.js/i,
+        /germainapm-.+-init.js/i,
         /cometd\/replay/
     ]
 }, {
     appName: 'Salesforce',
     username: GermainAPMSalesforceUtils.usernameLookup,
     session: GermainAPMSalesforceUtils.sessionLookup,
-    cid: GermainAPMSalesforceUtils.sessionLookup
+    sequence: BOOMR.utils.session.getSequence
 });
