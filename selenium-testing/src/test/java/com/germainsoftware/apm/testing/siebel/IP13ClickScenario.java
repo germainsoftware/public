@@ -5,6 +5,7 @@ import com.germainsoftware.apm.utils.DriverManager;
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -22,12 +23,11 @@ public class IP13ClickScenario {
 
     @Test
     public void testKPISLAThresholdCase() throws Exception {
-        long delay = 500L;
+        long delay = 1000L;
         driver.get(HOSTNAME);
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
         // scenario: login > monitoringCOnfig > KPI > User Click > User Click SLA
-
         // Explicit wait
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("s_swepi_1")));
@@ -49,34 +49,80 @@ public class IP13ClickScenario {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("s_swepi_22")));
         driver.findElement(By.id("s_swepi_22")).click();
         Thread.sleep(delay);
-
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ui-id-146")));
-            driver.findElement(By.id("ui-id-146")).click();
-            Thread.sleep(delay);
-        } catch (NoSuchElementException e){
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div[4]/div/div/div[1]/div[1]/ul/li[10]")));
-            driver.findElement(By.xpath("/html/body/div[1]/div/div[4]/div/div/div[1]/div[1]/ul/li[10]")).click();
-            Thread.sleep(delay);
-        }
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("All Service Requests")));
-        driver.findElement(By.linkText("All Service Requests")).click();
-        Thread.sleep(delay);
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("1-3125860")));
-        driver.findElement(By.linkText("1-3125860")).click();
-        Thread.sleep(delay);
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ui-id-260")));
-            driver.findElement(By.id("ui-id-260")).click();
-            Thread.sleep(delay);
-        } catch (NoSuchElementException e){
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div[5]/div/div/div[6]/div/div[1]/div/div[2]/div[2]/ul/li[6]")));
-            driver.findElement(By.xpath("/html/body/div[1]/div/div[5]/div/div/div[6]/div/div[1]/div/div[2]/div[2]/ul/li[7]")).click();
-            Thread.sleep(delay);
-        }
         
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText("Accounts")));
+            wait.until(ExpectedConditions.elementToBeClickable(By.partialLinkText("Accounts")));
+            driver.findElement(By.partialLinkText("Accounts")).click();
+        } catch (Exception e) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText("Accounts")));
+            driver.findElement(By.partialLinkText("Accounts")).click();
+            System.out.println("Clicked2");
+        }
+        Thread.sleep(delay);
+
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("s_4_1_16_0")));
+            driver.findElement(By.name("s_4_1_16_0")).click();
+        } catch (Exception e) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//DIV[@id='s_S_A4_div']/div/form/div/table/tbody/tr/td/table/tbody/tr[2]/td[2]/table/tbody/tr/td/input")));
+            driver.findElement(By.xpath("//DIV[@id='s_S_A4_div']/div/form/div/table/tbody/tr/td/table/tbody/tr[2]/td[2]/table/tbody/tr/td/input")).click();
+        }
+        Thread.sleep(delay);
+
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("All Accounts")));
+            driver.findElement(By.linkText("All Accounts")).click();
+        } catch (Exception e) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("null")));
+            driver.findElement(By.xpath("null")).click();
+        }
+        Thread.sleep(delay);
+
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("NewAcc")));
+            driver.findElement(By.linkText("NewAcc")).click();
+        } catch (Exception e) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//TD[@id='7Name']/a")));
+            driver.findElement(By.xpath("//TD[@id='7Name']/a")).click();
+        }
+        Thread.sleep(delay);
+
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("s_pdq")));
+            driver.findElement(By.name("s_pdq")).click();
+        } catch (Exception e) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//DIV[@id='PDQToolbar']/div[2]/select")));
+            driver.findElement(By.xpath("//DIV[@id='PDQToolbar']/div[2]/select")).click();
+        }
+        Thread.sleep(delay);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("s_pdq")));
+        driver.findElement(By.name("s_pdq")).sendKeys("All Fraud Accounts");
+        Thread.sleep(delay);
+
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("s_pdq")));
+            driver.findElement(By.name("s_pdq")).click();
+        } catch (Exception e) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//DIV[@id='PDQToolbar']/div[2]/select")));
+            driver.findElement(By.xpath("//DIV[@id='PDQToolbar']/div[2]/select")).click();
+        }
+        Thread.sleep(delay);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//A[@id='ui-id-182']/img")));
+        driver.findElement(By.xpath("//A[@id='ui-id-182']/img")).click();
+        Thread.sleep(delay);
+
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("1-3125830")));
+            driver.findElement(By.linkText("1-3125830")).click();
+        } catch (Exception e) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//A[@id='s_2_2_18_0_mb']")));
+            driver.findElement(By.xpath("//A[@id='s_2_2_18_0_mb']")).click();
+        }
+        Thread.sleep(delay);
+
     }
 
     @After
